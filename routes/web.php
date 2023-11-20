@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Task;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('welcome');
+    $tasks = Task::all();
+    return view('welcome', compact('tasks'));
 });
 
 Route::get('/cute-pepe', function () {
     return view('cute-pepe');
 })->name('cute-pepe');
+
