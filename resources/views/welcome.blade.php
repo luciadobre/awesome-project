@@ -107,10 +107,17 @@
 
             <div class="tasks">
                 <h2>Tasks</h2>
+                <a href="{{ route('tasks.create') }}">Create Task</a>
                 @foreach($tasks as $task)
                     <div class="task">
                         <p>Title: {{ $task->title }}</p>
                         <p>Description: {{ $task->description }}</p>
+                        <a href="{{ route('tasks.edit', ['id' => $task->id]) }}">Edit</a>
+                        <a href="{{ route('tasks.destroy', ['task' => $task->id]) }}" onclick="event.preventDefault(); document.getElementById('delete-task-form-{{ $task->id }}').submit();">Delete</a>
+                        <form id="delete-task-form-{{ $task->id }}" action="{{ route('tasks.destroy', ['task' => $task->id]) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     </div>
                 @endforeach
             </div>
